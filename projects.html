@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Jack's Portfolio - Creative Full Stack Developer specializing in modern web applications">
+    <meta name="keywords"
+        content="web developer, full stack developer, UI designer, portfolio, frontend developer, javascript developer">
+    <meta name="author" content="Jack Fletcher">
+    <meta name="theme-color" content="#0f172a">
+    <title>Jack's Portfolio | Projects Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --text: #f8fafc;
+            --bg: #0f172a;
+            --gradient: linear-gradient(135deg, #6366f1, #4f46e5);
+            --accent: #22d3ee;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --nav-height: 4.5rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+            font-size: 16px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .projects-section {
+            padding: 8rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent);
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            padding: 1rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            isolation: isolate;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: transparent;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.75rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-title::after {
+            width: 100%;
+        }
+
+        .project-description {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .project-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .feature-list li:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .feature-list li i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .project-link:hover::before {
+            transform: translateX(100%);
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --text: #f8fafc;
+            --bg: #0f172a;
+            --gradient: linear-gradient(135deg, #6366f1, #4f46e5);
+            --accent: #22d3ee;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --nav-height: 4.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-logo:hover svg {
+            transform: rotate(15deg);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            height: var(--nav-height);
+            padding: 0 2rem;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            right: 31%;
+            margin-left: 100px;
+        }
+
+        .nav-logo svg {
+            width: 2rem;
+            height: 2rem;
+            fill: var(--primary);
+        }
+
+        nav.scrolled {
+            height: 3.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a i {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        nav a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        nav a.active i {
+            color: white;
+        }
+
+        nav a.active::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+
+        @media (max-width: 768px) {
+
+            .hamburger {
+                display: block;
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 101;
+            }
+
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: min(250px, 70vw);
+                background: rgba(3, 7, 18, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 2rem;
+                transition: all 0.3s ease;
+            }
+
+            nav ul.active {
+                right: 0;
+                display: flex;
+            }
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.98), var(--bg));
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            position: relative;
+        }
+
+        .footer-section {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section h4 i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+
+
+        .footer-section p {
+            color: var(--text);
+            opacity: 0.9;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links li {
+            transition: transform 0.2s ease;
+        }
+
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            font-size: 1.1rem;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links a:hover i {
+            transform: rotate(15deg);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a i {
+            font-size: 1.2rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(360deg);
+            border-color: transparent;
+        }
+
+        .social-links a:hover::before {
+            transform: translateY(0);
+        }
+
+        .social-links a:hover i {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: var(--gradient);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .footer-content {
+                gap: 3rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        .animate.fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 16L4 12l4-4M16 8l4 4-4 4M13 5l-2 14" stroke="#6366f1" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+            Jack
+        </a>
+        <div class="hamburger" aria-label="Menu" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><a href="index.html" aria-label="Home"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="about.html" aria-label="About"><i class="fas fa-user"></i>About</a></li>
+            <li><a href="projects.html" class="active" aria-label="Projects"><i class="fas fa-code"></i>Projects</a>
+            </li>
+            <li><a href="skills.html" aria-label="Skills"><i class="fas fa-tools"></i>Skills</a></li>
+            <li><a href="contact.html" aria-label="Contact"><i class="fas fa-envelope"></i>Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="projects-section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <img src="Images/ai-project.png" alt="AI Website" class="project-image" loading="lazy">
+                <div class="project-content">
+                    <h3 class="project-title">AI - The Future</h3>
+                    <p class="project-description">An educational platform exploring AI's potential through interactive
+                        visualizations and engaging content.</p>
+                    <div class="project-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Interactive Elements</li>
+                            <li><i class="fas fa-check"></i>Dynamic Loading</li>
+                            <li><i class="fas fa-check"></i>Modern Animations</li>
+                            <li><i class="fas fa-check"></i>Responsive Design</li>
+                            <li><i class="fas fa-check"></i>AI Chat</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://jac869.github.io/AI/" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-eye"></i>Live Demo
+                        </a>
+                        <a href="https://github.com/Jac869/AI" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="Images/Jacks-project.png" alt="Jack's Portfolio" class="project-image" loading="lazy">
+                <div class="project-content">
+                    <h3 class="project-title">Personal Portfolio</h3>
+                    <p class="project-description">A modern portfolio showcasing my journey as a web developer through
+                        clean design and smooth interactions.</p>
+                    <div class="project-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Modern Design</li>
+                            <li><i class="fas fa-check"></i>Smooth Animations</li>
+                            <li><i class="fas fa-check"></i>Responsive Layout</li>
+                            <li><i class="fas fa-check"></i>Performance Optimized</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://jac869.github.io/Portfolio/" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-eye"></i>Live Demo
+                        </a>
+                        <a href="https://github.com/Jac869/Portfolio" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="Images/GamePage.png" alt="Game Site" class="project-image" loading="lazy">
+                <div class="project-content">
+                    <h3 class="project-title">Game Site</h3>
+                    <p class="project-description">A fun and interactive suit game built with JavaScript where players
+                        can compete against themselfs in many games.</p>
+                    <div class="project-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Interactive Gameplay</li>
+                            <li><i class="fas fa-check"></i>Score Tracking</li>
+                            <li><i class="fas fa-check"></i>Responsive Design</li>
+                            <li><i class="fas fa-check"></i>Clean UI</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://jac869.github.io/Games/" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-eye"></i>Live Demo
+                        </a>
+                        <a href="https://github.com/Jac869/Games" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="Images/Sign-InPage.png" alt="Sign-In" class="project-image" loading="lazy">
+                <div class="project-content">
+                    <h3 class="project-title">Sign-In Page</h3>
+                    <p class="project-description">A sign-in page that allows users to sign in with a username and
+                        password, and stores the data in a database (Not published online )</p>
+                    <div class="project-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Sign In Page</li>
+                            <li><i class="fas fa-check"></i>Database Storage</li>
+                            <li><i class="fas fa-check"></i>Username and Password</li>
+                            <li><i class="fas fa-check"></i>Clean UI</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://jac869.github.io/SignInPage/" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-eye"></i>Live Demo
+                        </a>
+                        <a href="https://github.com/Jac869/SignInPage" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="Images/edwards-clothing.png" alt="Edwards Clothing Website" class="project-image"
+                    loading="lazy">
+                <div class="project-content">
+                    <h3 class="project-title">Edwards Clothing</h3>
+                    <p class="project-description">A modern e-commerce platform featuring a minimalist design, seamless
+                        shopping experience, and responsive interface.</p>
+                    <div class="project-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Responsive Design</li>
+                            <li><i class="fas fa-check"></i>Product Catalog</li>
+                            <li><i class="fas fa-check"></i>Custom Animations</li>
+                            <li><i class="fas fa-check"></i>Shopping Cart</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://jac869.github.io/FirstUpload/" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-eye"></i>Live Demo
+                        </a>
+                        <a href="https://github.com/Jac869/FirstUpload" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="Images/ohio-project.png" alt="Ohio Website" class="project-image" loading="lazy">
+                <div class="project-content">
+                    <h3 class="project-title">Ohio - The Experience</h3>
+                    <p class="project-description">An immersive web experience showcasing Ohio's unique culture through
+                        interactive elements and creative design.</p>
+                    <div class="project-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Interactive UI</li>
+                            <li><i class="fas fa-check"></i>Dynamic Content</li>
+                            <li><i class="fas fa-check"></i>Custom Effects</li>
+                            <li><i class="fas fa-check"></i>Mobile Support</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://jac869.github.io/Ohio/" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-eye"></i>Live Demo
+                        </a>
+                        <a href="https://github.com/Jac869/Ohio" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-code"></i> About Me</h4>
+                <p>Passionate developer focused on creating innovative solutions through clean code and modern
+                    technologies.</p>
+                <div class="social-links">
+                    <a href="https://github.com/Jac869" aria-label="GitHub" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/themuppet2000" aria-label="Twitter" target="_blank" rel="noopener">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://discord.gg/h48HdFE9QZ" aria-label="Discord" target="_blank" rel="noopener">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i>Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i>About</a></li>
+                    <li><a href="projects.html"><i class="fas fa-chevron-right"></i>Projects</a></li>
+                    <li><a href="skills.html"><i class="fas fa-chevron-right"></i>Skills</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i>Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-envelope"></i> Contact Info</h4>
+                <ul class="footer-links">
+                    <li>
+                        <a href="mailto:jackjackfletcher@gmail.com">
+                            <i class="fas fa-envelope"></i>jackjackfletcher@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://discord.gg/h48HdFE9QZ" target="_blank" rel="noopener">
+                            <i class="fab fa-discord"></i>Discord Community
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Jack's Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            document.querySelectorAll('.footer-section, .project-card').forEach((el, index) => {
+                el.classList.add('animate');
+                el.style.animationDelay = `${index * 0.2}s`;
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.hero-content > *').forEach((el, i) => {
+                el.classList.add('animate', 'fade-in-right', `delay-${i + 1}`);
+            });
+
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('nav ul');
+
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

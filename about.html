@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Jack's Portfolio - Creative Front-End Developer specializing in HTML, CSS and JavaScript">
+    <meta name="keywords" content="front-end developer, web developer, HTML, CSS, JavaScript, portfolio">
+    <title>Jack's Portfolio | About Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --text: #f8fafc;
+            --bg: #0f172a;
+            --gradient: linear-gradient(135deg, #6366f1, #4f46e5);
+            --accent: #22d3ee;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --nav-height: 4.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            height: var(--nav-height);
+            padding: 0 2rem;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            right: 31%;
+            margin-left: 100px;
+        }
+
+        .nav-logo svg {
+            width: 2rem;
+            height: 2rem;
+            fill: var(--primary);
+        }
+
+        nav.scrolled {
+            height: 3.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a i {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        nav a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        nav a.active i {
+            color: white;
+        }
+
+        nav a.active::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .about-section {
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content {
+            animation: fadeInRight 0.8s ease forwards;
+            position: relative;
+            padding: 2rem;
+            border-radius: 20px;
+            background: var(--surface);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text);
+            opacity: 0.9;
+            position: relative;
+            padding-left: 1rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: scaleIn 0.8s ease forwards;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .about-image:hover::before {
+            opacity: 0.2;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            filter: grayscale(50%);
+        }
+
+        .nav-logo:hover svg {
+            transform: rotate(15deg);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .image-description {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: 10px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--text);
+        }
+
+        .image-description.show {
+            display: block;
+            animation: fadeInUp 0.3s ease forwards;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+            position: relative;
+        }
+
+        .stats-description {
+            display: none;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: 10px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--text);
+            animation: fadeInUp 0.3s ease forwards;
+        }
+
+        .stats-description.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                grid-template-columns: 1fr;
+                padding: 6rem 1rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hamburger {
+                display: block;
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 101;
+            }
+
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: min(250px, 70vw);
+                background: rgba(3, 7, 18, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 2rem;
+                transition: all 0.3s ease;
+            }
+
+            nav ul.active {
+                right: 0;
+                display: flex;
+            }
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.98), var(--bg));
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            position: relative;
+        }
+
+        .footer-section {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section h4 i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .footer-section p {
+            color: var(--text);
+            opacity: 0.9;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links li {
+            transition: transform 0.2s ease;
+        }
+
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            font-size: 1.1rem;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links a:hover i {
+            transform: rotate(15deg);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a i {
+            font-size: 1.2rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(360deg);
+            border-color: transparent;
+        }
+
+        .social-links a:hover::before {
+            transform: translateY(0);
+        }
+
+        .social-links a:hover i {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: var(--gradient);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                gap: 3rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate.fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 16L4 12l4-4M16 8l4 4-4 4M13 5l-2 14" stroke="#6366f1" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+            Jack
+        </a>
+        <div class="hamburger" aria-label="Menu" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><a href="index.html" aria-label="Home"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="about.html" class="active" aria-label="About"><i class="fas fa-user"></i>About</a></li>
+            <li><a href="projects.html" aria-label="Projects"><i class="fas fa-code"></i>Projects</a></li>
+            <li><a href="skills.html" aria-label="Skills"><i class="fas fa-tools"></i>Skills</a></li>
+            <li><a href="contact.html" aria-label="Contact"><i class="fas fa-envelope"></i>Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>Hi there! I'm Jack, a passionate Front-End Developer specializing in creating beautiful and interactive
+                web experiences. I love working with HTML, CSS, and JavaScript to bring designs to life and create
+                seamless user interfaces.</p>
+            <p>My journey in web development began with simple HTML pages, and I've since mastered modern CSS techniques
+                and JavaScript to create dynamic, responsive websites. I'm constantly learning and experimenting with
+                new web technologies to stay current with industry trends.</p>
+            <div class="about-stats">
+                <div class="stat-item"
+                    data-description="Over three years of hands-on experience with HTML and CSS, building responsive and accessible websites. I've mastered modern CSS techniques including Flexbox, Grid, and animations.">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Years of HTML/CSS</div>
+                </div>
+                <div class="stat-item"
+                    data-description="Successfully completed over 40 web projects ranging from simple landing pages to complex web applications. Each project has helped me refine my skills and learn new technologies.">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Web Projects</div>
+                </div>
+                <div class="stat-item"
+                    data-description="Proud to have worked with over 25 satisfied clients, delivering high-quality web solutions. I prioritize clear communication, timely delivery, and exceptional customer service throughout every project.">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+            </div>
+            <div class="stats-description"></div>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=600&fit=crop"
+                alt="Jack's profile picture - Developer at work" loading="lazy">
+            <div class="image-description">
+                This photo offers a glimpse into my daily routine—immersed in code, honing my programming skills. It’s
+                where focus meets creativity, with a touch of inspiration.
+            </div>
+        </div>
+    </section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4><i class="fas fa-code"></i> About Me</h4>
+            <p>Passionate developer focused on creating innovative solutions through clean code and modern
+                technologies.</p>
+            <div class="social-links">
+                <a href="https://github.com/Jac869" aria-label="GitHub" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/themuppet2000" aria-label="Twitter" target="_blank" rel="noopener">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://discord.gg/h48HdFE9QZ" aria-label="Discord" target="_blank" rel="noopener">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4><i class="fas fa-link"></i> Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="index.html"><i class="fas fa-chevron-right"></i>Home</a></li>
+                <li><a href="about.html"><i class="fas fa-chevron-right"></i>About</a></li>
+                <li><a href="projects.html"><i class="fas fa-chevron-right"></i>Projects</a></li>
+                <li><a href="skills.html"><i class="fas fa-chevron-right"></i>Skills</a></li>
+                <li><a href="contact.html"><i class="fas fa-chevron-right"></i>Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4><i class="fas fa-envelope"></i> Contact Info</h4>
+            <ul class="footer-links">
+                <li>
+                    <a href="mailto:jackjackfletcher@gmail.com">
+                        <i class="fas fa-envelope"></i>jackjackfletcher@gmail.com
+                    </a>
+                </li>
+                <li>
+                    <a href="https://discord.gg/h48HdFE9QZ" target="_blank" rel="noopener">
+                        <i class="fab fa-discord"></i>Discord Community
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Jack's Portfolio. All rights reserved.</p>
+    </div>
+</footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('nav ul');
+        const aboutImage = document.querySelector('.about-image');
+        const imageDescription = document.querySelector('.image-description');
+        const statItems = document.querySelectorAll('.stat-item');
+        const statsDescription = document.querySelector('.stats-description');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        aboutImage.addEventListener('click', () => {
+            imageDescription.classList.toggle('show');
+        });
+
+        statItems.forEach(item => {
+            item.addEventListener('click', () => {
+                statsDescription.textContent = item.dataset.description;
+                statsDescription.classList.add('show');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.hero-content > *').forEach((el, i) => {
+                el.classList.add('animate', 'fade-in-right', `delay-${i + 1}`);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.footer-section').forEach((el) => {
+                el.classList.add('animate');
+                observer.observe(el);
+            });
+
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let count = 0;
+                const duration = 2000;
+                const increment = target / (duration / 16);
+
+                const updateCount = () => {
+                    if (count < target) {
+                        count += increment;
+                        stat.textContent = Math.min(Math.round(count), target) + '+';
+                        requestAnimationFrame(updateCount);
+                    }
+                };
+
+                const statObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateCount();
+                        statObserver.unobserve(entries[0].target);
+                    }
+                });
+
+                statObserver.observe(stat);
+            });
+        });
+    </script>
+</body>
+
+</html>
